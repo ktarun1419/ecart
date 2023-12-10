@@ -9,19 +9,21 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    mix-blend-mode: multiply;
+    filter: contrast(1);
+    /* animation: App-logo-spin infinite 20s linear; */
   }
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #947cf43d;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(50, 48, 48);
 }
 
 .App-link {
@@ -35,4 +37,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+.connect{
+  width: 200px;
+  height: 56px;
+  background-color: #947cf4;
+  border-radius: 16px;
+  padding: 8px;
+  font-size: 18px;
+  color: rgb(50, 48, 48);
 }
