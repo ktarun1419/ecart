@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Checkout.css'
 const Checkout = () => {
+    const [items,setItems]=useState([])
     useEffect(() => {
         const rzpPaymentForm = document.getElementById("rzp_payment_form");
     
@@ -12,23 +13,29 @@ const Checkout = () => {
           rzpPaymentForm.appendChild(script);
         }
       });
+      useEffect(()=>{
+        setTimeout(()=>{
+            setItems([...items,{name:'Maggi',price:'200.00'}])
+        },10000)
+      },[])
   return (
     <div className='checkout'>
         <div className='checkout_header'>
             Checkout and Pay
         </div>
         <div className='checkout_body'>
-            <div className='each_item'>
+            {items.map((item)=>(<div className='each_item'>
                 <div>
-                    Maggi
+                   {item?.name}
                 </div>
                 <div>
-                    200.00
+                   {item?.price}
                 </div>
                 {/* <div>
                     E&
                 </div> */}
-            </div>
+            </div>))}
+            
         </div>
         <div className='checkout_footer'>
         <form id="rzp_payment_form"></form>
