@@ -14,7 +14,8 @@ function App() {
       const characteristic = await service.getCharacteristic('battery_level'); // Replace with your characteristic
   
       characteristic.readValue().then(value => {
-        console.log('Battery percentage is ' + value.getUint8(0));
+        // console.log('Battery percentage is ' + value.getUint8(0));
+        alert('Battery percentage is ' + value.getUint8(0))
       });
     } catch (error) {
       console.error('Error:', error);
