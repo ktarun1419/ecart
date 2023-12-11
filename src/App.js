@@ -10,16 +10,23 @@ function App() {
       });
   
       const server = await device.gatt.connect();
+      console.log({server})
       const service = await server.getPrimaryService('battery_service'); // Replace with your service
       const characteristic = await service.getCharacteristic('battery_level'); // Replace with your characteristic
-  
+      console.log({service})
       characteristic.readValue().then(value => {
         // console.log('Battery percentage is ' + value.getUint8(0));
         alert('Battery percentage is ' + value.getUint8(0))
       });
     } catch (error) {
       console.error('Error:', error);
+      alert(error)
     }
+  };
+  const handleCharacteristicValueChanged = (event) => {
+    const value = new TextDecoder().decode(event.target.value);
+    console.log('RFID Tag:', value);
+    // Process RFID tag value here
   };
   
   // Usage
