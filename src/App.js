@@ -1,8 +1,11 @@
 import logo from "./assets/logo.gif";
 import "./App.css";
 import Razorpay from "razorpay";
+import { useEffect, useState } from "react";
+import Checkout from "./Checkout";
 
 function App() {
+  const [isConnected, setisConnected] = useState(false);
   const connectBluetooth = async () => {
     try {
       const device = await navigator.bluetooth.requestDevice({
@@ -18,6 +21,7 @@ function App() {
       characteristic.readValue().then((value) => {
         // console.log('Battery percentage is ' + value.getUint8(0));
         alert("Battery percentage is " + value.getUint8(0));
+        setisConnected(true);
       });
     } catch (error) {
       console.error("Error:", error);
@@ -65,25 +69,36 @@ function App() {
         // handle error
       });
   };
+  
+  // const payNow=()=>{
+  //  let form= document.createElement('form')
+  //  let script=document.createElement('script')
+  //  script.scr='https://checkout.razorpay.com/v1/payment-button.js'
+  //  script['data-payment_button_id'] = 'pl_NAwy7E4AHIjSzo'
+  //  script.async=true
+
+  //   form.appendChild(script)
+
+  //   form.click()
+
+  // }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Smart , Reliable and Fast.</p>
+      {!isConnected ? (
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>Smart , Reliable and Fast.</p>
+          <button className="connect" onClick={connectBluetooth}>
+            Connect
+          </button>
 
-        <button className="connect" onClick={connectBluetooth}>
-          Connect
-        </button>
-        <form>
-          <script
-            src="https://checkout.razorpay.com/v1/payment-button.js"
-            data-payment_button_id="pl_NAwy7E4AHIjSzo"
-            async
-          >
-            {" "}
-          </script>{" "}
-        </form>
-      </header>
+          <button>
+         
+          </button>
+        </header>
+      ) : (
+        <Checkout />
+      )}
     </div>
   );
 }
